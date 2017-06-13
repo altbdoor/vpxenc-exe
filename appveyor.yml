@@ -7,15 +7,17 @@ clone_script:
 
 build_script:
 - cmd: >-
+    cd %APPVEYOR_BUILD_FOLDER%
+
+    appveyor DownloadFile "https://raw.githubusercontent.com/altbdoor/vpxenc-exe/master/build.sh" -FileName "build.sh"
+
     appveyor DownloadFile "https://cygwin.com/setup-x86_64.exe" -FileName "c:\cygwin-setup.exe"
 
     c:\cygwin-setup.exe --quiet-mode --no-shortcuts --no-startmenu --no-desktop --upgrade-also --only-site --site http://cygwin.mirror.constant.com/ --root c:\cygwin-root --local-package-dir c:\cygwin-setup-cache --packages make,automake,gcc,gcc-g++,perl,yasm
 
     set PATH=c:\cygwin-root\bin;%PATH%
 
-    c:\cygwin-root\bin\sh -lc "cd $APPVEYOR_BUILD_FOLDER/libvpx/; ./configure --disable-docs --disable-unit-tests --disable-shared --enable-static --target=x86_64-win64-gcc; make"
-
-    cd %APPVEYOR_BUILD_FOLDER%
+    c:\cygwin-root\bin\bash build.sh
 
     7z a bin.zip libvpx/vpxenc.exe libvpx/vpxdec.exe
 
