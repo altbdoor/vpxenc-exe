@@ -15,11 +15,15 @@ build_script:
 
     c:\cygwin-setup.exe --quiet-mode --no-shortcuts --no-startmenu --no-desktop --upgrade-also --only-site --site http://cygwin.mirror.constant.com/ --root c:\cygwin-root --local-package-dir c:\cygwin-setup-cache --packages make,automake,gcc,gcc-g++,perl,yasm
 
-    set PATH=c:\cygwin-root\bin;%PATH%
-
     c:\cygwin-root\bin\bash build.sh
 
-    7z a bin.zip libvpx/vpxenc.exe libvpx/vpxdec.exe
+    mkdir build
+
+    robocopy libvpx build vpxenc.exe vpxdec.exe > nul
+
+    robocopy c:\cygwin-root\bin build cygwin1.dll cygstdc++-6.dll > nul
+
+    7z a bin.zip build
 
 cache:
 - c:\cygwin-setup-cache
