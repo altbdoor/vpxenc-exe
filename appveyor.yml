@@ -15,6 +15,8 @@ build_script:
 
     c:\cygwin-setup.exe --quiet-mode --no-shortcuts --no-startmenu --no-desktop --upgrade-also --only-site --site http://cygwin.mirror.constant.com/ --root c:\cygwin-root --local-package-dir c:\cygwin-setup-cache --packages make,automake,gcc,gcc-g++,perl,yasm
 
+    set PATH=c:\cygwin-root\bin;%PATH%
+
     c:\cygwin-root\bin\bash build.sh
 
     mkdir build
