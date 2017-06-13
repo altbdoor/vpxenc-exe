@@ -13,16 +13,15 @@ build_script:
 
     set PATH=c:\cygwin-root\bin;%PATH%
 
-    c:\cygwin-root\bin\sh -lc "cd $APPVEYOR_BUILD_FOLDER/libvpx/; ./configure --disable-docs --disable-unit-tests --disable-shared --enable-static --target=x86_64-win64-gcc; make -j16"
+    c:\cygwin-root\bin\sh -lc "cd $APPVEYOR_BUILD_FOLDER/libvpx/; ./configure --disable-docs --disable-unit-tests --disable-shared --enable-static --target=x86_64-win64-gcc; make"
 
-    cd %APPVEYOR_BUILD_FOLDER%\libvpx
+    cd %APPVEYOR_BUILD_FOLDER%
 
-    dir /s/b *.exe
+    7z a bin.zip libvpx/vpxenc.exe libvpx/vpxdec.exe
 
 cache:
 - c:\cygwin-setup-cache
 
 test: off
 artifacts:
-- path: libvpx/vpxenc.exe
-- path: libvpx/vpxdec.exe
+- path: bin.zip
