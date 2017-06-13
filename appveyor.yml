@@ -7,21 +7,18 @@ clone_script:
 
 build_script:
 - cmd: >-
-    set PATH=C:\cygwin64\bin;C:\Perl;%PATH%
+    appveyor DownloadFile "https://cygwin.com/setup-x86_64.exe" -FileName "c:\cygwin-setup.exe"
 
-    cd %APPVEYOR_BUILD_FOLDER%
+    c:\cygwin-setup.exe --quiet-mode --no-shortcuts --no-startmenu --no-desktop --upgrade-also --only-site --site http://cygwin.mirror.constant.com/ --root c:\cygwin-root --local-package-dir c:\cygwin-setup-cache --packages make,automake,gcc,gcc-g++
 
-    mkdir build
+    set PATH=c:\cygwin-root\bin;c:\Perl;%PATH%
 
-    cd build
+    c:\cygwin-root\bin\sh -lc "cd $APPVEYOR_BUILD_FOLDER; mkdir build; cd build; ../libvpx/configure --disable-examples --disable-install-docs --disable-vp9 --target=x86_64-win32-gcc; make"
 
-    dir %APPVEYOR_BUILD_FOLDER%\libvpx
+    dir %APPVEYOR_BUILD_FOLDER%\build
 
-    %APPVEYOR_BUILD_FOLDER%\libvpx\configure --disable-examples --disable-install-docs --disable-vp9 --target=x86_64-win32-gcc
-
-    make
-
-    dir
+cache:
+- c:\cygwin-setup-cache
 
 test: off
 artifacts:
