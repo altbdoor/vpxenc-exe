@@ -19,14 +19,6 @@ build_script:
 
     c:\cygwin-root\bin\bash build.sh
 
-    mkdir build
-
-    robocopy libvpx build vpxenc.exe vpxdec.exe > nul
-
-    robocopy c:\cygwin-root\bin build cygwin1.dll cygstdc++-6.dll > nul
-
-    7z a bin.zip build
-
 cache:
 - c:\cygwin-setup-cache
 
