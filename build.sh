@@ -14,4 +14,5 @@ cp libvpx/vpxenc.exe build/
 cp libvpx/vpxdec.exe build/
 cp /cygdrive/c/cygwin-root/bin/cygwin1.dll build/
 cp /cygdrive/c/cygwin-root/bin/cygstdc++-6.dll build/
-7z a bin.zip build
+cp /cygdrive/c/cygwin-root/bin/cyggcc_s-seh-1.dll build/
+7z a build.zip build

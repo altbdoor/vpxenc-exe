@@ -24,4 +24,4 @@ cache:
 
 test: off
 artifacts:
-- path: bin.zip
+- path: build.zip
