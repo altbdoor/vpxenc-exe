@@ -13,9 +13,11 @@ build_script:
 
     set PATH=c:\cygwin-root\bin;%PATH%
 
-    c:\cygwin-root\bin\sh -lc "cd $APPVEYOR_BUILD_FOLDER; mkdir build; cd build; ../libvpx/configure --disable-examples --disable-install-docs --disable-unit-tests --disable-shared --enable-static --disable-vp9 --target=x86_64-win64-gcc; make"
+    c:\cygwin-root\bin\sh -lc "cd $APPVEYOR_BUILD_FOLDER; mkdir build; cd build; ../libvpx/configure --disable-examples --disable-install-docs --disable-unit-tests --disable-shared --enable-static --disable-vp9 --target=x86_64-win64-gcc --prefix=/usr/local/libvpx; make"
 
-    cd %APPVEYOR_BUILD_FOLDER%\build
+    dir c:\cygwin-root\
+
+    cd c:\cygwin-root\usr\local\libvpx
 
     dir /s/b *.exe
 
