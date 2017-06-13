@@ -13,11 +13,9 @@ build_script:
 
     set PATH=c:\cygwin-root\bin;%PATH%
 
-    c:\cygwin-root\bin\sh -lc "cd $APPVEYOR_BUILD_FOLDER/libvpx/; ./configure --target=x86_64-win64-gcc --disable-docs; make -j16"
+    c:\cygwin-root\bin\sh -lc "cd $APPVEYOR_BUILD_FOLDER/libvpx/; ./configure --disable-examples --disable-install-docs --disable-unit-tests --disable-shared --enable-static --disable-vp9 --target=x86_64-win64-gcc; make -j16"
 
     cd %APPVEYOR_BUILD_FOLDER%\libvpx
-
-    dir
 
     dir /s/b *.exe
 
@@ -26,4 +24,5 @@ cache:
 
 test: off
 artifacts:
-- path: build/config.log
+- path: libvpx/vpxenc.exe
+- path: libvpx/vpxdec.exe
