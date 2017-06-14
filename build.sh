@@ -1,11 +1,11 @@
 #!/bin/bash
 
-pacman -Sy --noconfirm --cache /c/pacman-cache make automake-wrapper perl yasm gcc
+pacman -Sy --needed --noconfirm --cachedir /c/pacman-cache make automake-wrapper perl yasm gcc
 
 cd $APPVEYOR_BUILD_FOLDER/libvpx/
 
 # --disable-shared --enable-static
-./configure --disable-docs --disable-unit-tests --target=x86_64-win64-gcc
+./configure --disable-docs --disable-unit-tests --target=x86_64-win64-gcc --enable-vp8 --disable-vp9
 make
 
 cd $APPVEYOR_BUILD_FOLDER/
