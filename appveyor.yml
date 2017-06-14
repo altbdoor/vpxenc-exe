@@ -11,17 +11,13 @@ build_script:
 
     appveyor DownloadFile "https://raw.githubusercontent.com/altbdoor/vpxenc-exe/master/build.sh" -FileName "build.sh"
 
-    appveyor DownloadFile "https://cygwin.com/setup-x86_64.exe" -FileName "c:\cygwin-setup.exe"
+    set PATH=c:\msys64\usr\bin;%PATH%
 
-    c:\cygwin-setup.exe --quiet-mode --no-shortcuts --no-startmenu --no-desktop --upgrade-also --only-site --site http://cygwin.mirror.constant.com/ --root c:\cygwin-root --local-package-dir c:\cygwin-setup-cache --packages make,automake,gcc,gcc-g++,perl,yasm
-
-    set PATH=c:\cygwin-root\bin;%PATH%
-
-    c:\cygwin-root\bin\bash build.sh
+    c:\msys64\usr\bin\bash build.sh
 
 cache:
-- c:\cygwin-setup-cache
+- c:\pacman-cache
 
 test: off
 artifacts:
-- path: build.zip
+- path: binary.zip
