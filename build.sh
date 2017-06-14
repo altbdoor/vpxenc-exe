@@ -4,8 +4,10 @@ pacman -Sy --needed --noconfirm --cachedir /c/pacman-cache make automake-wrapper
 
 cd $APPVEYOR_BUILD_FOLDER/libvpx/
 
-# --disable-shared --enable-static
-./configure --disable-docs --disable-unit-tests --target=x86_64-win64-gcc --enable-vp8 --disable-vp9
+./configure --disable-docs --disable-unit-tests --target=x86_64-win64-gcc \
+	--enable-vp8-encoder --enable-vp9-encoder \
+	--enable-vp8-decoder --enable-vp9-decoder
+
 make
 
 cd $APPVEYOR_BUILD_FOLDER/
